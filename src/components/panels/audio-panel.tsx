@@ -46,6 +46,7 @@ export function AudioPanel({ info }: { info: VideoInfo }) {
           <Select
             value={audioFormat}
             onValueChange={(v) => v && setAudioFormat(v)}
+            items={FORMATS}
             disabled={running}
           >
             <SelectTrigger className="w-full">
@@ -68,6 +69,7 @@ export function AudioPanel({ info }: { info: VideoInfo }) {
           <Select
             value={lossless ? "0" : audioQuality}
             onValueChange={(v) => v && setAudioQuality(v)}
+            items={QUALITIES}
             disabled={running || lossless}
           >
             <SelectTrigger className="w-full">

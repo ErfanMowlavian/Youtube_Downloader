@@ -46,6 +46,16 @@ export function TranscriptPanel({ info }: { info: VideoInfo }) {
     [subs, trackKey]
   );
 
+  // value -> label map so the trigger shows "English" / "English (auto)"
+  const langItems = useMemo(
+    () =>
+      subs.map((s) => ({
+        value: `${s.lang}|${s.auto}`,
+        label: s.auto ? `${s.name} (auto)` : s.name,
+      })),
+    [subs]
+  );
+
   if (subs.length === 0) {
     return (
       <div className="rounded-lg border border-dashed p-6 text-center text-sm text-muted-foreground">
@@ -97,6 +107,7 @@ export function TranscriptPanel({ info }: { info: VideoInfo }) {
           <Select
             value={trackKey}
             onValueChange={(v) => v && setTrackKey(v)}
+            items={langItems}
             disabled={loading}
           >
             <SelectTrigger className="w-full">
@@ -126,6 +137,7 @@ export function TranscriptPanel({ info }: { info: VideoInfo }) {
           <Select
             value={format}
             onValueChange={(v) => v && setFormat(v)}
+            items={FORMATS}
             disabled={loading}
           >
             <SelectTrigger className="w-full">

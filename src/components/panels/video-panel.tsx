@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -22,6 +22,15 @@ export function VideoPanel({ info }: { info: VideoInfo }) {
   );
   const running = state.status === "running";
 
+  // value -> label so the trigger shows "1080p", not the yt-dlp selector string
+  const items = useMemo(
+    () =>
+      info.qualities.length
+        ? info.qualities.map((q) => ({ value: q.selector, label: q.label }))
+        : [{ value: "bestvideo+bestaudio/best", label: "Best available" }],
+    [info.qualities]
+  );
+
   return (
     <div className="space-y-4">
       <div className="space-y-2">
@@ -31,6 +40,7 @@ export function VideoPanel({ info }: { info: VideoInfo }) {
         <Select
           value={selector}
           onValueChange={(v) => v && setSelector(v)}
+          items={items}
           disabled={running}
         >
           <SelectTrigger className="w-full">
@@ -47,7 +57,7 @@ export function VideoPanel({ info }: { info: VideoInfo }) {
                 <span className="flex w-full items-center justify-between gap-4">
                   <span className="font-medium">{q.label}</span>
                   <span className="text-xs text-muted-foreground">
-                    mp4 {q.filesize ? `· ~${formatBytes(q.filesize)}` : ""}
+                    mp4{q.filesize ? ` · ~${formatBytes(q.filesize)}` : ""}
                   </span>
                 </span>
               </SelectItem>
