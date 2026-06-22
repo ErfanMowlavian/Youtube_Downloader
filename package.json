@@ -15,9 +15,9 @@
     "ffmpeg"
   ],
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 4123",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 4123",
     "lint": "eslint"
   },
   "dependencies": {

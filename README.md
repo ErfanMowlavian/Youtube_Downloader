@@ -66,7 +66,7 @@ npm run dev
 
 ### 3. Open the app
 
-Visit **[http://localhost:3000](http://localhost:3000)**, paste a video URL, hit **Fetch**, and choose **Video**, **Transcript**, or **Audio**. 🎉
+Visit **[http://localhost:4123](http://localhost:4123)**, paste a video URL, hit **Fetch**, and choose **Video**, **Transcript**, or **Audio**. 🎉
 
 Downloaded files are saved to the project’s **`downloads/`** folder (and can also be saved through your browser).
 
@@ -144,10 +144,12 @@ YouTube changes things often. Update yt-dlp to the latest version:
 </details>
 
 <details>
-<summary><strong>Port 3000 is already in use</strong></summary>
+<summary><strong>Which URL do I open?</strong></summary>
 
-Next.js will fall back to the next free port (e.g. 3001) — check the terminal
-output for the exact URL, or free port 3000.
+The app runs on **http://localhost:4123** by default (chosen to avoid clashing
+with Docker, which often occupies port 3000). If that port is also taken,
+change it in `package.json` (`next dev -p <port>`) or run
+`npm run dev -- -p <port>`, and open whatever URL the terminal prints.
 </details>
 
 ---
